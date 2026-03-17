@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="my-5">Лабораторная работа №3: Аутентификация и сессии</h1>
+
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Задание 1: Счётчик посещений</h4>
+            <p>На странице <a href="{{ url_for('counter') }}">"Счётчик"</a> реализован счётчик посещений с использованием session.</p>
+
+            <h4 class="alert-heading mt-3">Задание 2: Аутентификация</h4>
+            <p>На странице <a href="{{ url_for('login') }}">"Войти"</a> находится форма входа.</p>
+            <p>Тестовый пользователь:</p>
+            <ul>
+                <li><strong>Логин:</strong> user</li>
+                <li><strong>Пароль:</strong> qwerty</li>
+            </ul>
+            <p>Чекбокс "Запомнить меня" сохраняет сессию после закрытия браузера.</p>
+
+            <h4 class="alert-heading mt-3">Задание 3: Секретная страница</h4>
+            <p>Страница <a href="{{ url_for('secret') }}">"Секретная"</a> доступна только авторизованным пользователям.</p>
+            <p>Ссылка на неё появляется в навбаре только после входа.</p>
+        </div>
+
+        {% if current_user.is_authenticated %}
+        <div class="alert alert-success">
+            <h5>Добро пожаловать, {{ current_user.id }}!</h5>
+            <p class="mb-0">Вы успешно авторизованы в системе.</p>
+        </div>
+        {% else %}
+        <div class="alert alert-warning">
+            <p class="mb-0">Вы не авторизованы. <a href="{{ url_for('login') }}">Войдите</a>, чтобы получить доступ к секретной странице.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

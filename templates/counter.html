@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Счётчик посещений{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="my-5">Счётчик посещений</h1>
+
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="display-1">{{ count }}</h2>
+                <p class="lead">
+                    {% if count == 1 %}
+                        Вы посетили эту страницу {{ count }} раз.
+                    {% elif count >= 2 and count <= 4 %}
+                        Вы посетили эту страницу {{ count }} раза.
+                    {% else %}
+                        Вы посетили эту страницу {{ count }} раз.
+                    {% endif %}
+                </p>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('counter') }}" class="btn btn-primary">Обновить страницу</a>
+                    <a href="{{ url_for('clear_counter') }}" class="btn btn-warning">Сбросить счётчик</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Как это работает?</h5>
+            </div>
+            <div class="card-body">
+                <p>Счётчик реализован с использованием глобального объекта <code>session</code> Flask.</p>
+                <p>Каждый раз при посещении страницы значение увеличивается на 1 и сохраняется в сессии пользователя.</p>
+                <p>Сессия уникальна для каждого пользователя и хранится на сервере.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
